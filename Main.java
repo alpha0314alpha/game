@@ -1,21 +1,29 @@
+import java.util.Scanner;
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.*;
+import java.time.*;
 
-public class Main{
+class Main extends JFrame{
+    static Scanner javain = new Scanner(System.in);
+    static int tick;
+
     public static void main(String[] args){
-        JFrame frame = new JFrame("United");
+        System.out.println("Input tick(ms)");
+        tick = javain.nextInt();
+        new Main();
+    }
 
-        JLabel label = new JLabel("not clicked yet");
-        JButton button = new JButton("click");
-        button.addActionListener(e -> { label.setText("clicked"); });
-
-        frame.setLayout(new FlowLayout());
-        frame.add(label);
-        frame.add(button);
-        
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+    public Main(){
+        double count = 0;
+        while (true){
+            try{
+                Thread.sleep(tick);
+            }
+            catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            count += tick/1000.0;
+            System.out.println(count);
+        }
     }
 }
